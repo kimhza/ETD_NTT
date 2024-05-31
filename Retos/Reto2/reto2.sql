@@ -1,0 +1,76 @@
+/* BASE DE DATOS */
+CREATE DATABASE IF NOT EXISTS Reto2;
+USE Reto2;
+
+/* CREACIÓN DE TABLAS */
+CREATE TABLE IF NOT EXISTS Estado (
+Id INT AUTO_INCREMENT PRIMARY KEY,
+Nombre_Estado VARCHAR(50),
+Latitud FLOAT,
+Longitud FLOAT,
+Fecha_Fundacion DATE);
+
+CREATE TABLE IF NOT EXISTS Poblacion (
+Id INT AUTO_INCREMENT PRIMARY KEY,
+Anio INT(4),
+Cantidad INT,
+Id_Estado INT,
+FOREIGN KEY (Id_Estado) REFERENCES Estado(Id));
+
+CREATE TABLE IF NOT EXISTS Residentes (
+Id INT AUTO_INCREMENT PRIMARY KEY,
+Anio INT(4),
+Residentes_Menores_65 INT,
+Id_Estado INT,
+FOREIGN KEY (Id_Estado) REFERENCES Estado(Id));
+
+
+CREATE TABLE Muertes (
+Id INT AUTO_INCREMENT PRIMARY KEY,
+Anio INT(4),
+Muertes INT,
+Id_Estado INT,
+FOREIGN KEY (Id_Estado) REFERENCES Estado(Id));
+
+/* INSERCIÓN EN LAS TABLAS */
+INSERT INTO Estado (Id, Nombre_Estado, Latitud, Longitud, Fecha_Fundacion) 
+VALUES (1, "Alabama", 33.258882, -86.829534, "1819-12-14"), 
+(2, "Florida", 27.756767, -81.463983, "1845-03-03"),
+(3, "Georgia", 32.329381, -83.113737, "1733-02-12"),
+(4, "South Carolina", 33.687439, -80.436374, "1776-03-26");
+
+INSERT INTO Poblacion (Id, Anio, Cantidad, Id_Estado)
+VALUES (1, 2000, 4447100,1),
+(2, 2001, 4451493,1),
+(3, 2000, 15982378, 2),
+(4, 2001, 17054000, 2),
+(5, 2000, 8186453, 3),
+(6, 2001, 8229823, 3),
+(7, 2000, 4012012, 4),
+(8, 2001, 4023438, 4);
+
+INSERT INTO Residentes (Id, Anio, Residentes_Menores_65, Id_Estado)
+VALUES (1, 2000, 3870598,1),
+(2, 2001, 3880476,1),
+(3, 2000, 13237167, 2),
+(4, 2001, 13548077, 2),
+(5, 2000, 7440877, 3),
+(6, 2001, 7582146, 3),
+(7, 2000, 3535770, 4),
+(8, 2001, 3567172, 4);
+
+INSERT INTO Muertes(Id, Anio, Muertes, Id_Estado)
+Values (1, 2000, 10622, 1),
+(2, 2001, 15912, 1),
+(3, 2000, 38103, 2),
+(4, 2001, 166069, 2),
+(5, 2000, 14804, 3),
+(6, 2001, 15000, 3),
+(7, 2000, 8581, 4),
+(8, 2001, 9500, 4);
+
+/* VERIFICACIÓN DEL CONTENIDO DE LAS TABLAS */
+SELECT * FROM Estado;
+SELECT * FROM Poblacion;
+SELECT * FROM Residentes;
+SELECT * FROM Muertes;
